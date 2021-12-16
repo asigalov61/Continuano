@@ -1,4 +1,4 @@
-# Continuano 1024 Multi_instrumental Model
+# Continuano 1024 Multi-Instrumental Model
 
 ## Larger embed, multi-instrumental dataset, even better results :)
 
