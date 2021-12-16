@@ -24,7 +24,7 @@ dropout_prob = 0.1
 
 ### Training Loss Graph:
 
-<img width="512" src="https://github.com/asigalov61/Continuano/raw/main/Model/1024x1024-Piano-TMD/Continuano%201024%20Training%20Loss%20Graph.png">
+<img width="512" src="https://github.com/asigalov61/Continuano/raw/main/Model/1024x1024-MI-TMD/Continuano-MI-Training-Loss-Graph.png">
 
 
 ***
