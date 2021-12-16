@@ -4,20 +4,20 @@
 
 ***
 
-## SOTA Piano Continuation Music AI Model and Implementation
+## SOTA Continuation Music AI Models and Implementation
 
 [![Open In Colab][colab-badge3]][colab-notebook3]
 
-[colab-notebook3]: <https://colab.research.google.com/github/asigalov61/Continuano/blob/main/Continuano.ipynb>
+[colab-notebook3]: <https://colab.research.google.com/github/asigalov61/Continuano/blob/main/[MI]_Continuano.ipynb>
 [colab-badge3]: <https://colab.research.google.com/assets/colab-badge.svg>
 
 ***
 
 ### Model Applications
 
-1) Original Piano Continuations Generation
+1) Original Continuations Generation
 
-2) Semi-original Piano performances generation
+2) Semi-original performances generation
 
 3) Accompaniment generation
 
@@ -29,7 +29,7 @@
 
 ### Model Details
 
-1) Trained upon ...
+1) Trained upon Tegridy MIDI Dataset
 
 2) Model SEQ: ...
 
