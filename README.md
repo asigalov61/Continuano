@@ -6,6 +6,15 @@
 
 ## SOTA Continuation Music AI Models and Implementation
 
+### Solo Piano Edition
+
+[![Open In Colab][colab-badge1]][colab-notebook3]
+
+[colab-notebook1]: <https://colab.research.google.com/github/asigalov61/Continuano/blob/main/Continuano.ipynb>
+[colab-badge1]: <https://colab.research.google.com/assets/colab-badge.svg>
+
+### Multi-Instrumental Edition
+
 [![Open In Colab][colab-badge3]][colab-notebook3]
 
 [colab-notebook3]: <https://colab.research.google.com/github/asigalov61/Continuano/blob/main/[MI]_Continuano.ipynb>
