@@ -8,7 +8,7 @@
 
 ### Solo Piano Edition
 
-[![Open In Colab][colab-badge1]][colab-notebook3]
+[![Open In Colab][colab-badge1]][colab-notebook1]
 
 [colab-notebook1]: <https://colab.research.google.com/github/asigalov61/Continuano/blob/main/Continuano.ipynb>
 [colab-badge1]: <https://colab.research.google.com/assets/colab-badge.svg>
@@ -38,7 +38,7 @@
 
 ### Model Details
 
-1) Trained upon Tegridy MIDI Dataset
+1) Trained upon Ultimate Piano MIDI Dataset (512 embed model) and Tegridy MIDI Dataset (1024 embed models)
 
 2) Model SEQ: ...
 
