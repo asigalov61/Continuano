@@ -124,7 +124,7 @@ get_ipython().run_line_magic('cd', '/content/')
 
 
 #@title Load/Reload the model
-full_path_to_model_checkpoint = "/content/Continuano-1024-MI.pth" #@param {type:"string"}
+full_path_to_model_checkpoint = "/content/Continuano-Trained-Model.pth" #@param {type:"string"}
 
 print('Loading the model...')
 config = GPTConfig(3100, 
