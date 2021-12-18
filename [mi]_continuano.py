@@ -137,7 +137,7 @@ print('Done!')
 """
 
 #@title Load your custom MIDI here
-full_path_tp_custom_MIDI = "/content/tegridy-tools/tegridy-tools/seed2.mid" #@param {type:"string"}
+full_path_tp_custom_MIDI = "/content/tegridy-tools/tegridy-tools/seed.mid" #@param {type:"string"}
 print('=' * 70)
 
 print('Loading custom MIDI...')
@@ -329,7 +329,7 @@ for i in tqdm(range(min(number_of_input_melody_notes, len(pitches)))):
   rand_seq = model.generate(torch.Tensor(sng + [times[i], pitches[i]]), 
                               target_seq_length=len(sng + [times[i], pitches[i]]) + 16, 
                               temperature=1,
-                              stop_token=256+256,
+                              stop_token=3100,
                               verbose=False)
     
   out = rand_seq[0].cpu().numpy().tolist()
@@ -403,7 +403,7 @@ song = []
 sng = []
 tim = 0
 
-for i in tqdm(range(min(number_of_input_melody_notes, len(pitches)))):
+for i in tqdm(range(min(number_of_input_melody_notes, len(pitches))-1)):
   
   if len(sng) + 2 + 16 >= 1024:
     break
