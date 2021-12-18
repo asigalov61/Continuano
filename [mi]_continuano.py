@@ -137,7 +137,7 @@ print('Done!')
 """
 
 #@title Load your custom MIDI here
-full_path_tp_custom_MIDI = "/content/tegridy-tools/tegridy-tools/seed.mid" #@param {type:"string"}
+full_path_tp_custom_MIDI = "/content/tegridy-tools/tegridy-tools/seed2.mid" #@param {type:"string"}
 print('=' * 70)
 
 print('Loading custom MIDI...')
