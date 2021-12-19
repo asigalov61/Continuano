@@ -165,8 +165,9 @@ for i in SONG:
         if i[0] != 0:
             inputs.extend([i[0]])
             
-            times.extend([i[0]])
-            pitches.extend([256+(256 * i[2])+i[3]])
+            if i[2] < 10:
+              times.extend([i[0]])
+              pitches.extend([256+(256 * i[2])+i[3]])
 
         inputs.extend([256+(256 * i[2])+i[3]])
 
@@ -411,12 +412,12 @@ for i in tqdm(range(min(number_of_input_melody_notes, len(pitches))-1)):
   rand_seq = model.generate(torch.Tensor(sng + [abs(times[i]-tim), pitches[i]]), 
                               target_seq_length=len(sng) + 2 + 16, 
                               temperature=1,
-                              stop_token=256+256,
+                              stop_token=3100,
                               verbose=False)
     
   out = rand_seq[0].cpu().numpy().tolist()
 
-  sng.extend([abs(times[i]-tim), pitches[i]+768])
+  sng.extend([abs(times[i]-tim), pitches[i]])
     
   outy = []
   tim = 0
@@ -426,13 +427,10 @@ for i in tqdm(range(min(number_of_input_melody_notes, len(pitches))-1)):
       outy.append(o)
    
     else:
-      tim += o
-    
-      if (times[i+1] / 3) > tim:
+      if (times[i+1] / 3) > tim + o:
          outy.append(o)
-           
+         tim += o  
       else:
-         tim -= o
          break
   
   sng.extend(outy)
