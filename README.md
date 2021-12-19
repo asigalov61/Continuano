@@ -4,7 +4,7 @@
 
 ***
 
-## SOTA Continuation Music AI Models and Implementation
+## SOTA Accompaniment and Continuation Music AI Models and Implementation
 
 ### Solo Piano Edition
 
