@@ -312,10 +312,10 @@ Audio(str(fname + '.wav'), rate=16000)
 """
 
 #@title Generate an accompaniment for the custom MIDI melody
-number_of_input_melody_notes = 128 #@param {type:"slider", min:16, max:256, step:16}
+number_of_input_melody_notes = 256 #@param {type:"slider", min:16, max:256, step:16}
+number_of_instruments = 10 #@param {type:"slider", min:1, max:10, step:1}
+
 print('=' * 70)
-
-
 print('Continuano Music Model Accompaniment Generator')
 print('=' * 70)
 
@@ -328,16 +328,16 @@ for i in tqdm(range(min(number_of_input_melody_notes, len(pitches)))):
     break
   
   rand_seq = model.generate(torch.Tensor(sng + [times[i], pitches[i]]), 
-                              target_seq_length=len(sng + [times[i], pitches[i]]) + 16, 
+                              target_seq_length=len(sng) + 2 + 16, 
                               temperature=1,
-                              stop_token=3100,
+                              stop_token=256+(256 * number_of_instruments),
                               verbose=False)
     
   out = rand_seq[0].cpu().numpy().tolist()
 
   outy = []
 
-  for o in out[len(sng + [times[i], pitches[i]]):]:
+  for o in out[len(sng) + 2:]:
     if o >=256:
       outy.append(o)
     else:
@@ -393,10 +393,12 @@ Audio(str(fname + '.wav'), rate=16000)
 """## Advanced Accompaniment Generator"""
 
 #@title Generate an accompaniment for the custom MIDI melody
-number_of_input_melody_notes = 128 #@param {type:"slider", min:16, max:256, step:16}
+number_of_input_melody_notes = 256 #@param {type:"slider", min:16, max:256, step:16}
+number_of_instruments = 10 #@param {type:"slider", min:1, max:10, step:1}
+minimum_beat_delta_time = 12 #@param {type:"slider", min:0, max:50, step:1}
+number_of_prime_notes = 8 #@param {type:"slider", min:1, max:16, step:1}
+
 print('=' * 70)
-
-
 print('Continuano Music Model Advanced Accompaniment Generator')
 print('=' * 70)
 
@@ -404,35 +406,38 @@ song = []
 sng = []
 tim = 0
 
-for i in tqdm(range(min(number_of_input_melody_notes, len(pitches))-1)):
+for i in range(number_of_prime_notes):
+    sng.append(times[i])
+    sng.append(pitches[i])
+
+for i in tqdm(range(number_of_prime_notes, min(number_of_input_melody_notes, len(pitches))-1)):
   
   if len(sng) + 2 + 16 >= 1024:
     break
   
   rand_seq = model.generate(torch.Tensor(sng + [abs(times[i]-tim), pitches[i]]), 
                               target_seq_length=len(sng) + 2 + 16, 
-                              temperature=1,
-                              stop_token=3100,
+                              stop_token=256+(256 * number_of_instruments),
                               verbose=False)
     
   out = rand_seq[0].cpu().numpy().tolist()
-
-  sng.extend([abs(times[i]-tim), pitches[i]])
     
+  sng.extend([abs(times[i]-tim), pitches[i]])
+
   outy = []
   tim = 0
-    
+
   for o in out[len(sng):]:
     if o >=256:
       outy.append(o)
-   
+
     else:
-      if (times[i+1] / 3) > tim + o:
+      if (times[i+1]-tim) > o and o > minimum_beat_delta_time:
          outy.append(o)
          tim += o  
       else:
          break
-  
+
   sng.extend(outy)
 
 print('=' * 70)
@@ -446,6 +451,7 @@ if len(sng) != 0:
     pitch = 0
     duration = 0
     once = True
+
     for s in song:
       if s >= 0 and s <= 256:
           time += s
@@ -454,6 +460,7 @@ if len(sng) != 0:
           pitch = s % 256
           channel = (s // 256) - 1
           song_f.append(['note', (abs(time))*10, 250, channel, pitch, pitch ])
+          
       
     detailed_stats = TMIDIX.Tegridy_SONG_to_MIDI_Converter(song_f,
                                                           output_signature = 'Continuano',  
